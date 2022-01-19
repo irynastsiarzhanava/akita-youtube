@@ -1,6 +1,10 @@
 # AkitaYoutube
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
+Main technologies used in this project: 
+    - Akita State Management by Datorama
+    - Angular Material
+    - SCSS
 
 ## Development server
 
