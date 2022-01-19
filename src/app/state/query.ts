@@ -1,7 +1,12 @@
+import { Injectable } from "@angular/core";
 import { Query } from "@datorama/akita";
 import { Observable } from "rxjs";
 import { Todo } from "../todo.model";
 import { TodoState, TodoStore } from './store';
+
+@Injectable({
+    providedIn: 'root'
+})
 
 export class TodoQuery extends Query<TodoState> {
     constructor(private todoStore: TodoStore) {

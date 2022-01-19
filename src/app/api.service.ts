@@ -3,6 +3,7 @@ import { HttpClient} from '@angular/common/http';
 import { Observable } from "rxjs";
 import { environment } from '../environments/environment.prod';
 import { Todo } from "./todo.model";
+import { map } from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -10,23 +11,25 @@ import { Todo } from "./todo.model";
 
 export class ApiService {
     private readonly baseUrl = environment.baseUrl;
+
     constructor(private http: HttpClient) {
+      }
 
-    }
-
-    addTodo(todo: Todo): Observable<Todo> {
-        return this.http.post<Todo>(this.baseUrl, todo);
-    }
-
-    getTodos() {
-        return this.http.get<Todo[]>(this.baseUrl);
-    }
-
+    addTodo(title: string, description: string): Observable<Todo> {
+        return this.http.post<Todo>(this.baseUrl, { title, description });
+      }
+    
+    getTodos(): Observable<Todo[]> {
+        return this.http.get<{ data: Todo[] }>(this.baseUrl).pipe(
+          map((res: { data: any; }) => res.data)
+        );
+      }
+    
     deleteTodo(id: string): Observable<Todo> {
         return this.http.delete<Todo>(`${this.baseUrl}/${id}`);
-    }
-
-    updateTodo(id: string, changes: Todo): Observable<Todo> {
+      }
+    
+    updateTodo(id: string, changes: any): Observable<Todo> {
         return this.http.put<Todo>(`${this.baseUrl}/${id}`, changes);
-    }
+      }
 }
