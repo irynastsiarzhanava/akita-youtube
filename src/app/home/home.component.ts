@@ -1,3 +1,4 @@
+import { TodoStatus } from './../todo.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TodoQuery } from '../state/query';
@@ -50,4 +51,20 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/add-todo');
   }
 
+  markAsComplete(id: string) {
+    this.apiService.updateTodo(id, { status: TodoStatus.DONE }).subscribe(res => {
+      this.todoStore.update(state => {
+        const todos = [...state.todos];
+        const index = todos.findIndex(t => t._id === id);
+        todos[index] = {
+          ...todos[index],
+          status: TodoStatus.DONE
+        };
+        return {
+          ...state,
+          todos
+        };
+      });
+    }, err => console.log(err));
+  }
 }
