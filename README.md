@@ -6,6 +6,7 @@ Main technologies used in this project:
 * Angular Material
 * SCSS
 
+Learning source - [State Management in Angular using Akita](https://www.youtube.com/watch?v=Lez1pWTu7b8&list=PLaY6YJMqp51eoN-bVk01nwEmYJ2cB7UUz)
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
